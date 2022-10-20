@@ -1,0 +1,79 @@
+package com.company;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        ArrayList<Integer> portArray = new ArrayList<>();
+
+        portArray.add(0, 4500);
+        portArray.add(1, -5000);
+        portArray.add(2, -1000);
+        portArray.add(3, -19000);
+        portArray.add(4, 2000);
+        portArray.add(5, 9000);
+        portArray.add(6, 9500);
+
+
+        int n = portArray.size();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (portArray.get(j) < (portArray.get(j + 1))) {
+                    int h = portArray.get(j);
+                    portArray.set(j, portArray.get(j + 1));
+                    portArray.set(j + 1, h);
+                }
+            }
+        }
+        ArrayList<String> nameArray = new ArrayList<>();
+
+        nameArray.add(0, "JebelAliDubai");
+        nameArray.add(1, "Salalah");
+        nameArray.add(2, "Mombasa");
+        nameArray.add(3, "Zanzibar");
+        nameArray.add(4, "JawarhalNehru");
+        nameArray.add(5, "DarEsSalaam");
+        nameArray.add(6, "TanjungPelepas");
+
+
+        System.out.println("Listen efter sortering: ");
+        System.out.println(portArray);
+        int i=0;
+        int j=portArray.size()-1;
+
+        while (i != j && i <= portArray.size()/2 ) {
+            if (portArray.get(i) > 0 && portArray.get(j) < 0) {
+
+                if (portArray.get(i) < portArray.get(j) * (-1)) { // Hvis der er plads til at sende
+
+                    System.out.println(nameArray.get(i) + " sender: " + portArray.get(i) + " containers til " + nameArray.get(j));
+
+                    portArray.set(j, portArray.get(j) + portArray.get(i));
+                    portArray.set(i, portArray.get(i) - portArray.get(i));
+                }
+
+                if (portArray.get(i) >= portArray.get(j) * (-1)){ // hvis der ikke plads til at sende
+
+                    System.out.println(nameArray.get(i) + " sender: " + (portArray.get(j)*(-1)) + " container til " + nameArray.get(j));
+
+                    portArray.set(i,portArray.get(i)-(portArray.get(j)*(-1)));
+                    portArray.set(j,portArray.get(j)+(portArray.get(j)*(-1)));
+                }
+
+                if (portArray.get(i) == 0) {
+                    i++;
+                }
+                if (portArray.get(j) == 0) {
+                    j--;
+                }
+            }
+            System.out.println(portArray);
+        }
+        System.out.println("all ports are back til origins");
+    }
+}
